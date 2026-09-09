@@ -4,7 +4,7 @@
 
 This repository bundles two things:
 
-1. **MCU-CodeBench task set** — 324 MCU firmware code-generation tasks (plus an 80-task seed and a 12-task network family) across 6 platforms and 18 scenarios, each with a natural-language prompt, hardware constraints, expected behavior, evaluation checksais, and failure modes.
+1. **MCU-CodeBench task set** — 324 MCU firmware code-generation tasks (plus an 80-task seed and a 12-task network family) across 6 platforms and 18 scenarios, each with a natural-language prompt, hardware constraints, expected behavior, evaluation checks, and failure modes.
 2. **The automatic evaluation pipeline** — a standalone grader that performs a real `arm-none-eabi-gcc` cross-compile of each generated snippet, measures flash/RAM footprint, checks linkability, and produces a six-dimensional quality score plus an on-device readiness verdict.
 
 It is a standalone, self-contained benchmark: the dataset and the grader live in one repo, and the grader reads the dataset directly — no experiment harness or model is required to reproduce a score.
