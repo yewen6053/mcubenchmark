@@ -1,0 +1,94 @@
+# eval_metrics.yaml
+# Multi-dimensional evaluation framework for generated MCU/edge firmware C code.
+#
+# Consumed by src/edge_evaluator.py. Replaces the old shallow 0.3/0.35/0.35
+# composite (syntax + structure + completeness) with a real on-device (上机)
+# assessment: cross-compilation, flash/RAM footprint, edge-specific correctness,
+# real-time/power awareness, structure, and functional completeness.
+
+# ---- composite edge_score weights (must sum to 1.0) ----
+# compile is king: code that will not build can never run on a device.
+weights:
+  compile: 0.30          # real arm-none-eabi-gcc cross-compile success
+  footprint: 0.10        # flash/RAM bytes vs target MCU budget
+  edge: 0.25             # peripheral/HAL/ISR/volatile/timeout/error-handling correctness
+  realtime_power: 0.10   # interrupt/timer/low-power vs pure polling
+  structure: 0.15        # includes/modularity/comments/types/encapsulation
+  functional: 0.10       # required-API coverage derived from task category
+
+# ---- target MCU flash/RAM budgets (bytes) for footprint satisfaction ----
+# The footprint score uses flash_satisfaction/ram_satisfaction against these.
+targets:
+  cortex-m0:  { flash: 32768,    ram: 4096 }
+  cortex-m3:  { flash: 131072,   ram: 20480 }
+  cortex-m4:  { flash: 262144,   ram: 65536 }
+  cortex-m7:  { flash: 1048576,  ram: 327680 }
+# default target used by the evaluator when none is specified
+default_target: cortex-m4
+
+# ---- priority metrics (driving the on-device readiness verdict) ----
+priority_metrics:
+  - compile_success_rate     # fraction of snippets that actually cross-compile
+  - genuine_error_rate       # fraction that fail due to real C defects (not SDK gaps)
+  - flash_budget_satisfaction
+  - ram_budget_satisfaction
+  - on_device_readiness      # build_ready / needs_fixes / won't_build distribution
+
+# ---- detailed metric catalogue (for reporting / downstream tools) ----
+metrics:
+  - name: compile_success_rate
+    category: build
+    higher_is_better: true
+    desc: Fraction of generated snippets that cross-compile with arm-none-eabi-gcc for the target.
+  - name: clean_compile_rate
+    category: build
+    higher_is_better: true
+    desc: Fraction that compile WITHOUT any SDK auto-stub (truly self-contained).
+  - name: genuine_error_rate
+    category: build
+    higher_is_better: false
+    desc: Fraction rejected by the real compiler for genuine C defects (type/syntax/logic).
+  - name: sdk_stub_rate
+    category: build
+    higher_is_better: false
+    desc: Fraction that only compile after stubbing missing vendor-SDK symbols.
+  - name: average_warnings
+    category: quality
+    higher_is_better: false
+    desc: Average -Wall -Wextra warnings per snippet.
+  - name: flash_budget_satisfaction
+    category: resource
+    higher_is_better: true
+    desc: min(1, flash_budget / measured_flash_bytes) from arm-none-eabi-size.
+  - name: ram_budget_satisfaction
+    category: resource
+    higher_is_better: true
+    desc: min(1, ram_budget / measured_ram_bytes) from arm-none-eabi-size.
+  - name: average_flash_bytes
+    category: resource
+    higher_is_better: false
+    desc: Mean .text+.data footprint of the generated translation unit.
+  - name: edge_correctness_score
+    category: edge
+    higher_is_better: true
+    desc: Peripheral/HAL usage, volatile IO, ISR safety, DMA, timeout, error checking.
+  - name: realtime_power_score
+    category: edge
+    higher_is_better: true
+    desc: Interrupt/timer usage, low-power modes, polling vs event-driven.
+  - name: structure_score
+    category: quality
+    higher_is_better: true
+    desc: Includes, modularity, comments, proper types, encapsulation.
+  - name: functional_completeness_score
+    category: behavior
+    higher_is_better: true
+    desc: Coverage of task-required peripheral APIs (replaces hard-coded keyword bonus).
+  - name: edge_score
+    category: composite
+    higher_is_better: true
+    desc: Weighted composite (0-100) across all dimensions above.
+  - name: on_device_readiness
+    category: verdict
+    higher_is_better: true
+    desc: build_ready (compiles, fits budget, no critical anti-patterns) / needs_fixes / won't_build.

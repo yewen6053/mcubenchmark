@@ -1,0 +1,168 @@
+[
+  {
+    "id": "stm32cube_f4",
+    "name": "STMicroelectronics STM32CubeF4 examples",
+    "url": "https://github.com/STMicroelectronics/STM32CubeF4",
+    "license": "STMicroelectronics software license; use as reference unless license review permits code import",
+    "coverage": [
+      "STM32 HAL",
+      "GPIO",
+      "ADC",
+      "DMA",
+      "USB",
+      "FreeRTOS",
+      "low power",
+      "bootloader"
+    ]
+  },
+  {
+    "id": "stm32cube_f1",
+    "name": "STMicroelectronics STM32CubeF1 examples",
+    "url": "https://github.com/STMicroelectronics/STM32CubeF1",
+    "license": "STMicroelectronics software license; use as reference unless license review permits code import",
+    "coverage": [
+      "STM32 HAL",
+      "timers",
+      "UART",
+      "I2C",
+      "SPI",
+      "interrupts"
+    ]
+  },
+  {
+    "id": "esp_idf_examples",
+    "name": "Espressif ESP-IDF examples",
+    "url": "https://github.com/espressif/esp-idf/tree/master/examples",
+    "license": "Apache-2.0",
+    "coverage": [
+      "ESP-IDF",
+      "Wi-Fi",
+      "BLE",
+      "FreeRTOS",
+      "storage",
+      "security",
+      "peripherals"
+    ]
+  },
+  {
+    "id": "pico_examples",
+    "name": "Raspberry Pi Pico examples",
+    "url": "https://github.com/raspberrypi/pico-examples",
+    "license": "BSD-3-Clause",
+    "coverage": [
+      "Pico SDK",
+      "PIO",
+      "ADC",
+      "PWM",
+      "USB",
+      "multicore",
+      "DMA"
+    ]
+  },
+  {
+    "id": "zephyr_samples",
+    "name": "Zephyr samples",
+    "url": "https://github.com/zephyrproject-rtos/zephyr/tree/main/samples",
+    "license": "Apache-2.0",
+    "coverage": [
+      "drivers",
+      "kernel",
+      "Bluetooth",
+      "networking",
+      "power management",
+      "testing"
+    ]
+  },
+  {
+    "id": "freertos_demo",
+    "name": "FreeRTOS demos",
+    "url": "https://github.com/FreeRTOS/FreeRTOS/tree/main/FreeRTOS/Demo",
+    "license": "MIT",
+    "coverage": [
+      "tasks",
+      "queues",
+      "timers",
+      "semaphores",
+      "heap",
+      "tickless idle"
+    ]
+  },
+  {
+    "id": "arduino_avr_examples",
+    "name": "Arduino AVR core libraries and examples",
+    "url": "https://github.com/arduino/ArduinoCore-avr",
+    "license": "LGPL-2.1",
+    "coverage": [
+      "Arduino",
+      "AVR",
+      "GPIO",
+      "analog",
+      "serial",
+      "Wire",
+      "SPI"
+    ]
+  },
+  {
+    "id": "libopencm3_examples",
+    "name": "libopencm3 examples",
+    "url": "https://github.com/libopencm3/libopencm3-examples",
+    "license": "GPL-3.0-or-later for examples; use as reference unless license review permits code import",
+    "coverage": [
+      "bare-metal STM32",
+      "timers",
+      "USB",
+      "USART",
+      "ADC",
+      "DMA"
+    ]
+  },
+  {
+    "id": "tinyusb_examples",
+    "name": "TinyUSB examples",
+    "url": "https://github.com/hathach/tinyusb/tree/master/examples",
+    "license": "MIT",
+    "coverage": [
+      "USB device",
+      "USB host",
+      "CDC",
+      "HID",
+      "MSC",
+      "MIDI"
+    ]
+  },
+  {
+    "id": "littlefs",
+    "name": "littlefs embedded filesystem",
+    "url": "https://github.com/littlefs-project/littlefs",
+    "license": "BSD-3-Clause",
+    "coverage": [
+      "flash filesystem",
+      "wear leveling",
+      "power-loss resilience"
+    ]
+  },
+  {
+    "id": "fatfs",
+    "name": "FatFs generic FAT filesystem",
+    "url": "http://elm-chan.org/fsw/ff/00index_e.html",
+    "license": "FatFs license; permissive but review before redistribution",
+    "coverage": [
+      "SD card",
+      "FAT filesystem",
+      "block devices"
+    ]
+  },
+  {
+    "id": "mbed_os_examples",
+    "name": "Arm Mbed OS examples",
+    "url": "https://github.com/ARMmbed/mbed-os-example-blinky",
+    "license": "Apache-2.0",
+    "coverage": [
+      "Mbed OS",
+      "drivers",
+      "RTOS",
+      "networking",
+      "low power"
+    ]
+  }
+]
